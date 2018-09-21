@@ -1,0 +1,3 @@
+[submodule "containers/appoptics-agent-docker"]
+	path = containers/appoptics-agent-docker
+	url = https://github.com/appoptics/appoptics-agent-docker
