@@ -14,10 +14,11 @@ Vagrant.configure("2") do |config|
   config.vm.provider "virtualbox" do |vb|
     vb.gui = true
     vb.memory = "1024"
+    vb.name = "saltmaster"
 
     config.vm.provision "shell", inline: <<-SHELL
       sudo cp -p /srv/share/keymgmt.sh /etc/cron.hourly/keymgmt.sh
-      sudo crontab /srv/shar/cronjob
+      sudo crontab /srv/share/cronjob
     SHELL
 
 end
@@ -35,5 +36,7 @@ end
     salt.minion_key = "keys/salt/saltmaster.pem"
     salt.minion_pub = "keys/salt/saltmaster.pub"
     salt.seed_master = {saltmaster: 'keys/salt/saltmaster.pub'}
+    salt.run_highstate = true
 end
+  config.vm.post_up_message = "press enter to complete setup..."
 end

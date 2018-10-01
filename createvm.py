@@ -74,13 +74,14 @@ if 'centos' in box:
 
 #add Virtual Box config lines
 vmconf.write('  #virtualbox configuration\n')
-vmconf.write('  config.vm.provider "virtualbox" do |vb|\n    vb.gui = true\n    vb.memory = "'+str(memory)+'"\nend\n')
+vmconf.write('  config.vm.provider "virtualbox" do |vb|\n    vb.gui = true\n    vb.name="'+hostname+'"\n    vb.memory = "'+str(memory)+'"\nend\n')
 
 #configure salt
 vmconf.write('  #salt configuration\n')
 vmconf.write('  config.vm.provision :salt do |salt|\n  salt.install_type = "stable"\n  salt.verbose = true\n  salt.colorize = true\n')
 
 #generate salt keys
+print("Creating Salt Keys")
 path = os.getcwd()+'/hosts/saltmaster'
 cmd = "vagrant ssh -c 'sudo salt-key --gen-keys="+hostname+" --gen-keys-dir=/srv/hosts/"+hostname+"/keys/salt/ && sudo cp -p /srv/hosts/"+hostname+"/keys/salt/"+hostname+".pub /etc/salt/pki/master/minions/"+hostname+"'"
 subprocess.call('cd '+path+' && '+cmd, shell=True)
@@ -93,19 +94,14 @@ vmconf.write('  salt.minion_config = "../../salt/config/minion"\n')
 vmconf.write('  salt.minion_id = "'+hostname+'"\n')
 vmconf.write('  salt.minion_key = "keys/salt/'+hostname+'.pem"\n')
 vmconf.write('  salt.minion_pub = "keys/salt/'+hostname+'.pub"\n')
-vmconf.write('   salt.run_highstate = true\n')
-vmconf.write('end\nend')
+vmconf.write('  salt.run_highstate = true\n')
 
+vmconf.write('end\n config.vm.post_up_message = "press enter to complete setup..."\nend')
 
+#start vm
+print("Starting VM "+hostname)
+path = os.getcwd()+'/hosts/'+hostname
+cmd = 'vagrant up'
+p = subprocess.Popen(['vagrant', 'up'], cwd=path)
 
-
-
-
-
-#generate salt keys
-
-#insert salt config into vagrant file
-
-#vagrant up box
-
-#vagrant ssh box
+sys.exit(0)
