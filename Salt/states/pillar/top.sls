@@ -1,4 +1,5 @@
 base:
+
   '*':
     - ao_token
 

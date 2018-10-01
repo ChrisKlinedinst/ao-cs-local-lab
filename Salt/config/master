@@ -8,7 +8,7 @@
 
 # Set the location of the salt master server, if the master server cannot be
 # resolved, then the minion will fail to start.
-master: 192.168.111.10
+master: 172.28.128.50
 
 # Set whether the minion should connect to the master via IPv6
 #ipv6: False
@@ -39,7 +39,7 @@ master: 192.168.111.10
 # Since salt uses detached ids it is possible to run multiple minions on the
 # same machine but with different ids, this can be useful for salt compute
 # clusters.
-id: master
+id: saltmaster
 
 # Append a domain to a hostname in the event that it does not exist.  This is
 # useful for systems where socket.getfqdn() does not actually result in a
@@ -352,6 +352,8 @@ grains:
 # the situation where your keys end up in a bad state. If you run in open mode
 # you do so at your own risk!
 #open_mode: False
+
+#autosign_grains_dir: /srv/salt/autosign_grains
 
 # Enable permissive access to the salt keys.  This allows you to run the
 # master or minion as root, but have a non-root group be given access to
