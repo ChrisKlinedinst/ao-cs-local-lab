@@ -7,7 +7,7 @@ hostname = str(raw_input("Hostname for VM to destroy: "))
 
 
 #prompt for OS, default will be ubun
-confirm = str(raw_input("Are you sure you want to destroy this VM?"))
+confirm = str(raw_input("Are you sure you want to destroy this VM?: "))
 if confirm is 'yes' or 'y':
     print("Destroying VM "+hostname)
     path = os.getcwd()+'/hosts/'+hostname

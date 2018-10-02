@@ -4,8 +4,7 @@ base:
     - ao_token
 
   'G@type:host':
-    - ao_host_agent_install
-    - git
+    - ao_host_agent
 
   'G@roles:docker':
-    - docker_install
+    - docker

@@ -21,4 +21,4 @@
 #
 # m h  dom mon dow   command
 
-*	*	*	* *	/etc/cron.hourly/keymgmt.sh
+* * * * * /etc/cron.hourly/keymgmt.sh

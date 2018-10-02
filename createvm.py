@@ -5,10 +5,18 @@ from random import randint
 path = os.getcwd()
 
 #prompt for OS, default will be ubun
-box = str(raw_input("Vagrant Box Name: \n ex: ubuntu/xenial64, centos/7,  "))
+box = str(raw_input("Vagrant Box Name \n ex: ubuntu, centos, ubuntu/trusty64: "))
 if box is '':
     box = 'ubuntu/trusty64'
     print('building with Ubuntu 14.04')
+
+elif box == 'ubuntu':
+        box = 'ubuntu/xenial64'
+        print('building with Ubuntu 16.04')
+
+elif box == 'centos':
+    box = 'centos/7'
+    print('building with Centos 7 Minmal')
 
 #prompt for hostname, default will be box+4 random nums
 hostname = str(raw_input("Hostname for VM: "))

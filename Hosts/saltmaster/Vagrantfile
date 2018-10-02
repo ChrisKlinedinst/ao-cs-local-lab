@@ -31,8 +31,8 @@ end
     salt.install_type = "stable"
     salt.master_config = "../../salt/config/master"
     salt.minion_config = "../../salt/config/master"
-#    salt.master_key = "keys/salt/saltmaster.pem"
-#    salt.master_pub = "keys/salt/saltmaster.pub"
+    salt.master_key = "keys/salt/saltmaster.pem"
+    salt.master_pub = "keys/salt/saltmaster.pub"
     salt.minion_key = "keys/salt/saltmaster.pem"
     salt.minion_pub = "keys/salt/saltmaster.pub"
     salt.seed_master = {saltmaster: 'keys/salt/saltmaster.pub'}

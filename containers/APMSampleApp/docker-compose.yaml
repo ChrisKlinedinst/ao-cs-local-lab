@@ -1,0 +1,64 @@
+version: '2'
+
+services:
+  #
+  #demo.booking-service ( Java / Tomcat)
+  #
+  demo.booking-service:
+    image: appoptics/demo-booking-service:with-data
+    environment:
+      - APPOPTICS_SERVICE_KEY=${APPOPTICS_TOKEN}:demo-booking-service
+    container_name: demo.booking-service
+    hostname: booking-service
+    extra_hosts:
+      - "booking.neta-suites.com:127.0.0.1"
+      - "db.neta-suites.com:127.0.0.1"
+
+  #
+  #demo.web-tier (Ruby on Rails)
+  #
+  demo.web-tier:
+    image: appoptics/demo-web-tier
+    container_name: demo.web-tier
+    hostname: client-frontend
+    extra_hosts:
+      - "neta-suites.com:127.0.0.1"
+    links:
+      - "demo.booking-service:booking.neta-suites.com"
+    depends_on:
+      - demo.booking-service
+    ports:
+      - 3000:3000
+    environment:
+      - ROBBOSS_SERVICE_BOOKING_URL=http://booking.neta-suites.com:8080
+      - APPOPTICS_SERVICE_KEY=${APPOPTICS_TOKEN}:demo-web-tier
+
+  #
+  #demo.api (Golang)
+  #
+  demo.api:
+    image: appoptics/demo-api
+    environment:
+      - APPOPTICS_SERVICE_KEY=${APPOPTICS_TOKEN}:demo-api
+    links:
+      - "demo.booking-service:booking.neta-suites.com"
+    depends_on:
+      - demo.booking-service
+    ports:
+      - 8082:3005
+    container_name: demo.api
+    hostname: demo-api-1
+
+  #
+  #demo.load-gen (uses cron and apache bench to generate traffic)
+  #
+  demo.load-gen:
+    image: appoptics/demo-load-gen
+    links:
+      - "demo.web-tier:example-suites.com"
+      - "demo.api:api.example-suites.com"
+    depends_on:
+      - demo.api
+      - demo.web-tier
+    container_name: demo.load-gen
+    hostname: load_gen_1
