@@ -68,12 +68,11 @@ vmconf.write('  config.vm.hostname = "'+hostname+'"\n')
 vmconf.write('  #network configuration\n')
 vmconf.write('  config.vm.network "private_network", type: "dhcp"\n')
 
-#map salt share
+#map local shares
 vmconf.write('  #map local shares\n')
 vmconf.write('  config.vm.synced_folder "../../salt/states/pillar", "/srv/salt"\n')
-
-#map local share
 vmconf.write('  config.vm.synced_folder "share", "/srv/share"\n')
+vmconf.write('  config.vm.synced_folder "containers", "../../containers"\n')
 
 #enable networking on centos
 
