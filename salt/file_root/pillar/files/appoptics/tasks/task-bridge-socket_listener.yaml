@@ -1,0 +1,17 @@
+---
+version: 1
+schedule:
+  type: "streaming"
+workflow:
+  collect:
+    metrics:
+      /socket_listener/*/all: {}
+    config:
+      /socket_listener:
+        MaxCollectDuration: "60s"
+        MaxMetricsBuffer: 1000
+    publish:
+      - plugin_name: publisher-appoptics
+        config:
+          period: 60
+          floor_seconds: 60

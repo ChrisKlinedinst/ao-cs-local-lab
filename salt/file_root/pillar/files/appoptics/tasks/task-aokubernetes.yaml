@@ -1,0 +1,87 @@
+---
+version: 1
+
+schedule:
+  type: streaming
+
+deadline: "55s"
+
+workflow:
+  collect:
+
+    config:
+      /kubernetes:
+        MaxCollectDuration: "2s"
+        MaxMetricsBuffer: 250
+
+    metrics:
+      /kubernetes/pod/*/*/*/status/phase/Pending: {}
+      /kubernetes/pod/*/*/*/status/phase/Running: {}
+      /kubernetes/pod/*/*/*/status/phase/Succeeded: {}
+      /kubernetes/pod/*/*/*/status/phase/Failed: {}
+      /kubernetes/pod/*/*/*/status/phase/Unknown: {}
+      /kubernetes/pod/*/*/*/status/condition/ready: {}
+      /kubernetes/pod/*/*/*/status/condition/scheduled: {}
+      /kubernetes/container/*/*/*/*/status/restarts: {}
+      /kubernetes/container/*/*/*/*/status/ready: {}
+      /kubernetes/container/*/*/*/*/status/waiting: {}
+      /kubernetes/container/*/*/*/*/status/running: {}
+      /kubernetes/container/*/*/*/*/status/terminated: {}
+      /kubernetes/container/*/*/*/*/requested/cpu/cores: {}
+      /kubernetes/container/*/*/*/*/requested/memory/bytes: {}
+      /kubernetes/container/*/*/*/*/limits/cpu/cores: {}
+      /kubernetes/container/*/*/*/*/limits/memory/bytes: {}
+      /kubernetes/node/*/spec/unschedulable: {}
+      /kubernetes/node/*/status/outofdisk: {}
+      /kubernetes/node/*/status/capacity/cpu/cores: {}
+      /kubernetes/node/*/status/capacity/memory/bytes: {}
+      /kubernetes/node/*/status/capacity/pods: {}
+      /kubernetes/node/*/status/allocatable/cpu/cores: {}
+      /kubernetes/node/*/status/allocatable/memory/bytes: {}
+      /kubernetes/node/*/status/allocatable/pods: {}
+      /kubernetes/deployment/*/*/metadata/generation: {}
+      /kubernetes/deployment/*/*/status/targetedreplicas: {}
+      /kubernetes/deployment/*/*/status/availablereplicas: {}
+      /kubernetes/deployment/*/*/status/unavailablereplicas: {}
+      /kubernetes/deployment/*/*/status/updatedreplicas: {}
+      /kubernetes/deployment/*/*/spec/desiredreplicas: {}
+      /kubernetes/deployment/*/*/spec/paused: {}
+      # All available metrics
+      # /kubernetes/pod/*/*/*/status/phase/Pending: {}
+      # /kubernetes/pod/*/*/*/status/phase/Running: {}
+      # /kubernetes/pod/*/*/*/status/phase/Succeeded: {}
+      # /kubernetes/pod/*/*/*/status/phase/Failed: {}
+      # /kubernetes/pod/*/*/*/status/phase/Unknown: {}
+      # /kubernetes/pod/*/*/*/status/condition/ready: {}
+      # /kubernetes/pod/*/*/*/status/condition/scheduled: {}
+      # /kubernetes/container/*/*/*/*/status/restarts: {}
+      # /kubernetes/container/*/*/*/*/status/ready: {}
+      # /kubernetes/container/*/*/*/*/status/waiting: {}
+      # /kubernetes/container/*/*/*/*/status/running: {}
+      # /kubernetes/container/*/*/*/*/status/terminated: {}
+      # /kubernetes/container/*/*/*/*/requested/cpu/cores: {}
+      # /kubernetes/container/*/*/*/*/requested/memory/bytes: {}
+      # /kubernetes/container/*/*/*/*/limits/cpu/cores: {}
+      # /kubernetes/container/*/*/*/*/limits/memory/bytes: {}
+      # /kubernetes/node/*/spec/unschedulable: {}
+      # /kubernetes/node/*/status/outofdisk: {}
+      # /kubernetes/node/*/status/capacity/cpu/cores: {}
+      # /kubernetes/node/*/status/capacity/memory/bytes: {}
+      # /kubernetes/node/*/status/capacity/pods: {}
+      # /kubernetes/node/*/status/allocatable/cpu/cores: {}
+      # /kubernetes/node/*/status/allocatable/memory/bytes: {}
+      # /kubernetes/node/*/status/allocatable/pods: {}
+      # /kubernetes/deployment/*/*/metadata/generation: {}
+      # /kubernetes/deployment/*/*/status/observedgeneration: {}
+      # /kubernetes/deployment/*/*/status/targetedreplicas: {}
+      # /kubernetes/deployment/*/*/status/availablereplicas: {}
+      # /kubernetes/deployment/*/*/status/unavailablereplicas: {}
+      # /kubernetes/deployment/*/*/status/updatedreplicas: {}
+      # /kubernetes/deployment/*/*/spec/desiredreplicas: {}
+      # /kubernetes/deployment/*/*/spec/paused: {}
+      # /kubernetes/deployment/*/*/status/deploynotfinished: {}
+    publish:
+    - plugin_name: publisher-appoptics
+      config:
+        period: 60
+        floor_seconds: 60

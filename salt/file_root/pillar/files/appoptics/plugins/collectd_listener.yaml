@@ -1,0 +1,36 @@
+collector:
+  collectd_listener:
+    all:
+      ## URL to listen on. Collectd's network plugin uses UDP.
+      service_address: "udp://localhost:25826"
+      # service_address: "udp4://:8094"
+      # service_address: "udp6://:8094"
+
+      ## Maximum socket buffer size in bytes.
+      ## For stream sockets, once the buffer fills up, the sender will start backing up.
+      ## For datagram sockets, once the buffer fills up, metrics will start dropping.
+      ## Defaults to the OS default.
+      # read_buffer_size: 65535
+
+      ## Authentication file for cryptographic security levels
+      # collectd_auth_file: "/etc/collectd/auth_file"
+      ## One of none (default), sign, or encrypt
+      # collectd_security_level: "encrypt"
+      ## Path of to TypesDB specifications
+      # collectd_typesdb: |
+      #   "/usr/share/collectd/types.db"
+
+      ## Metric name prefix
+      bridge_prefix: "collectd"
+      # bridge_prefix: ""
+
+      # grpc_timeout sets the maximum time allowed for a gRPC call.
+      # Some collector or plublisher plugins require more time to finish a gRPC method call during collection or publishing.
+      # When increasing grpc_timeout value with the deadline value specified in
+      # manifest task file which controls the total time allocated for the
+      # Default value is 10
+      grpc_timeout: 30
+
+load:
+  plugin: snap-plugin-collector-bridge-collectd_listener
+  task: task-bridge-collectd_listener.yaml

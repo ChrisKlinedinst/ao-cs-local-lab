@@ -5,7 +5,7 @@ from random import randint
 path = os.getcwd()
 
 #prompt for OS, default will be ubun
-box = str(raw_input("Vagrant Box Name \n ex: ubuntu, centos, ubuntu/trusty64: "))
+box = str(raw_input("Enter a Vagrant Box Name \n default is ubuntu 14 \n for latest release use short names (ubuntu or centos) \n for a full list of availalbe boxes see https://app.vagrantup.com/boxes/search \n Box Name: "))
 if box is '':
     box = 'ubuntu/trusty64'
     print('building with Ubuntu 14.04')
@@ -52,7 +52,7 @@ except OSError:
     print ('unable to create dir at '  + str(path) + ' the dir may already exist...')
 
 try:
-    os.makedirs(path+'/keys/salt', access_rights)
+    os.makedirs(path+'/.keys/salt', access_rights)
 except OSError:
     print ('unable to create dir at '  + str(path) + ' the dir may already exist...')
 
@@ -70,9 +70,9 @@ vmconf.write('  config.vm.network "private_network", type: "dhcp"\n')
 
 #map local shares
 vmconf.write('  #map local shares\n')
-vmconf.write('  config.vm.synced_folder "../../salt/states/pillar", "/srv/salt"\n')
+vmconf.write('  config.vm.synced_folder "../../salt/file_root/pillar", "/srv/salt"\n')
 vmconf.write('  config.vm.synced_folder "share", "/srv/share"\n')
-vmconf.write('  config.vm.synced_folder "containers", "../../containers"\n')
+vmconf.write('  config.vm.synced_folder "../../containers", "/srv/containers"\n')
 
 #enable networking on centos
 
@@ -90,17 +90,17 @@ vmconf.write('  config.vm.provision :salt do |salt|\n  salt.install_type = "stab
 #generate salt keys
 print("Creating Salt Keys")
 path = os.getcwd()+'/hosts/saltmaster'
-cmd = "vagrant ssh -c 'sudo salt-key --gen-keys="+hostname+" --gen-keys-dir=/srv/hosts/"+hostname+"/keys/salt/ && sudo cp -p /srv/hosts/"+hostname+"/keys/salt/"+hostname+".pub /etc/salt/pki/master/minions/"+hostname+"'"
+cmd = "vagrant ssh -c 'sudo salt-key --gen-keys="+hostname+" --gen-keys-dir=/srv/hosts/"+hostname+"/.keys/salt/ && sudo cp -p /srv/hosts/"+hostname+"/.keys/salt/"+hostname+".pub /etc/salt/pki/master/minions/"+hostname+"'"
 subprocess.call('cd '+path+' && '+cmd, shell=True)
-os.chmod("hosts/"+hostname+"/keys/salt/"+hostname+".pem", 0o644)
-#cmd = "vagrant ssh -c 'sudo cp --no-preserve=662 /srv/hosts/"+hostname+"/keys/salt/"+hostname+".pub /etc/salt/pki/master/minions/"+hostname+".pub'"
+os.chmod("hosts/"+hostname+"/.keys/salt/"+hostname+".pem", 0o644)
+#cmd = "vagrant ssh -c 'sudo cp --no-preserve=662 /srv/hosts/"+hostname+"/.keys/salt/"+hostname+".pub /etc/salt/pki/master/minions/"+hostname+".pub'"
 #subprocess.call('cd '+path+' && '+cmd, shell=True)
 
 #import salt keys
 vmconf.write('  salt.minion_config = "../../salt/config/minion"\n')
 vmconf.write('  salt.minion_id = "'+hostname+'"\n')
-vmconf.write('  salt.minion_key = "keys/salt/'+hostname+'.pem"\n')
-vmconf.write('  salt.minion_pub = "keys/salt/'+hostname+'.pub"\n')
+vmconf.write('  salt.minion_key = ".keys/salt/'+hostname+'.pem"\n')
+vmconf.write('  salt.minion_pub = ".keys/salt/'+hostname+'.pub"\n')
 vmconf.write('  salt.run_highstate = true\n')
 
 vmconf.write('end\n config.vm.post_up_message = "press enter to complete setup..."\nend')

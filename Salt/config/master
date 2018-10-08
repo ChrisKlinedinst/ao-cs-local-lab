@@ -309,9 +309,9 @@ grains:
 # roots cannot match, otherwise the downloaded files will not be able to be
 # reliably ensured. A base environment is required to house the top file.
 # Example:
-# file_roots:
-#   base:
-#     - /srv/salt/
+file_roots:
+  base:
+    - /srv/salt/pillar
 #   dev:
 #     - /srv/salt/dev/services
 #     - /srv/salt/dev/states
@@ -341,9 +341,9 @@ grains:
 # The Salt pillar is searched for locally if file_client is set to local. If
 # this is the case, and pillar data is defined, then the pillar_roots need to
 # also be configured on the minion:
-#pillar_roots:
-#  base:
-#    - /srv/pillar
+pillar_roots:
+  base:
+    - /srv/pillar
 
 ######        Security settings       #####
 ###########################################

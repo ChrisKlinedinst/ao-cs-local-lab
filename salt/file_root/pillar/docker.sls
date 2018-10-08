@@ -14,14 +14,12 @@ docker:
     - enable: True
 
 #configure appoptics docker plugin
-ao_plugin:
+ao_plugin_file:
   cmd.run:
     - name:  sudo usermod -aG docker appoptics
-  file.copy:
+  file.managed:
     - name: /opt/appoptics/etc/plugins.d/docker.yaml
-    - source: /opt/appoptics/etc/plugins.d/docker.yaml.example
-    - preserve: False
-    - force: False
+    - source: salt://files/appoptics/plugins/docker.yaml
     - user: appoptics
     - group: appoptics
     - mode: 644
@@ -30,3 +28,16 @@ ao_plugin:
     - restart: True
     - watch:
       - file: /opt/appoptics/etc/plugins.d/docker.yaml
+
+ao_task_file:
+  file.managed:
+    - name: /opt/appoptics/etc/tasks.d/task-aodocker.yaml
+    - source: salt://files/appoptics/tasks/task-aodocker.yaml
+    - user: appoptics
+    - group: appoptics
+    - mode: 644
+  service.running:
+    - name: appoptics-snapteld
+    - restart: True
+    - watch:
+      - file: /opt/appoptics/etc/tasks.d/task-aodocker.yaml

@@ -1,0 +1,374 @@
+---
+version: 1
+schedule:
+  # Run every minute
+  type: cron
+  interval: "0 * * * * *"
+workflow:
+  collect:
+    metrics:
+      /mysql/aborted/clients: {}
+      /mysql/aborted/connects: {}
+      /mysql/cache_result/qcache-hits: {}
+      /mysql/cache_result/qcache-inserts: {}
+      /mysql/cache_result/qcache-not_cached: {}
+      /mysql/cache_size/qcache: {}
+      /mysql/cache_size/qcache-free_blocks: {}
+      /mysql/cache_size/qcache-total_blocks: {}
+      /mysql/cache_size/qcache-free_memory: {}
+      /mysql/created/tmp_disk_tables: {}
+      /mysql/created/tmp_tables: {}
+      /mysql/created/tmp_files: {}
+      /mysql/gauge/buffer_pool_pages_data: {}
+      /mysql/gauge/buffer_pool_pages_dirty: {}
+      /mysql/gauge/buffer_pool_pages_free: {}
+      /mysql/gauge/buffer_pool_pages_misc: {}
+      /mysql/innodb_data/fsyncs: {}
+      /mysql/innodb_data/reads: {}
+      /mysql/innodb_data/writes: {}
+      /mysql/innodb_log/writes: {}
+      /mysql/innodb_pages/created: {}
+      /mysql/innodb_pages/read: {}
+      /mysql/innodb_pages/written: {}
+      /mysql/innodb_rows/deleted: {}
+      /mysql/innodb_rows/inserted: {}
+      /mysql/innodb_rows/read: {}
+      /mysql/innodb_rows/updated: {}
+      /mysql/innodb_row_lock/time: {}
+      /mysql/innodb_row_lock/waits: {}
+      /mysql/locks/immediate: {}
+      /mysql/locks/lock_deadlocks: {}
+      /mysql/locks/waited: {}
+      /mysql/octets/rx: {}
+      /mysql/octets/tx: {}
+      /mysql/operations/buffer_pool_read_requests: {}
+      /mysql/operations/buffer_pool_reads: {}
+      /mysql/operations/buffer_pool_wait_free: {}
+      /mysql/operations/innodb_rwlock_s_spin_rounds: {}
+      /mysql/operations/innodb_rwlock_s_spin_waits: {}
+      /mysql/operations/innodb_rwlock_x_os_waits: {}
+      /mysql/threads/cached: {}
+      /mysql/threads/connected: {}
+      /mysql/threads/running: {}
+      /mysql/total_threads/created: {}
+      /mysql/queries/total: {}
+      /mysql/select/full_join: {}
+      /mysql/select/full_range_join: {}
+      /mysql/select/range: {}
+      /mysql/select/range_check: {}
+      /mysql/select/scan: {}
+      /mysql/sort/merge_passes: {}
+      /mysql/sort/range: {}
+      /mysql/sort/rows: {}
+      /mysql/sort/scan: {}
+      /mysql/commands/*: {}
+      /mysql/handler/*: {}
+      /mysql/slow/queries: {}
+      /mysql/uptime/total: {}
+      /mysql/uptime/since_flush_status: {}
+      # All available metrics
+      # /mysql/aborted/clients: {}
+      # /mysql/aborted/connects: {}
+      # /mysql/bpool_bytes/data: {}
+      # /mysql/bpool_bytes/dirty: {}
+      # /mysql/bpool_counters/pages_flushed: {}
+      # /mysql/bpool_counters/read_ahead: {}
+      # /mysql/bpool_counters/read_ahead_evicted: {}
+      # /mysql/bpool_counters/read_ahead_rnd: {}
+      # /mysql/bpool_counters/read_requests: {}
+      # /mysql/bpool_counters/reads: {}
+      # /mysql/bpool_counters/write_requests: {}
+      # /mysql/bpool_pages/data: {}
+      # /mysql/bpool_pages/dirty: {}
+      # /mysql/bpool_pages/free: {}
+      # /mysql/bpool_pages/misc: {}
+      # /mysql/bpool_pages/total: {}
+      # /mysql/bytes/buffer_pool_size: {}
+      # /mysql/bytes/ibuf_size: {}
+      # /mysql/bytes/metadata_mem_pool_size: {}
+      # /mysql/cache_result/qcache-hits: {}
+      # /mysql/cache_result/qcache-inserts: {}
+      # /mysql/cache_result/qcache-not_cached: {}
+      # /mysql/cache_size/qcache: {}
+      # /mysql/cache_size/qcache-free_blocks: {}
+      # /mysql/cache_size/qcache-total_blocks: {}
+      # /mysql/cache_size/qcache-free_memory: {}
+      # /mysql/created/tmp_disk_tables: {}
+      # /mysql/created/tmp_tables: {}
+      # /mysql/created/tmp_files: {}
+      # /mysql/commands/admin_commands: {}
+      # /mysql/commands/alter_db: {}
+      # /mysql/commands/alter_db_upgrade: {}
+      # /mysql/commands/alter_event: {}
+      # /mysql/commands/alter_function: {}
+      # /mysql/commands/alter_procedure: {}
+      # /mysql/commands/alter_server: {}
+      # /mysql/commands/alter_table: {}
+      # /mysql/commands/alter_tablespace: {}
+      # /mysql/commands/analyze: {}
+      # /mysql/commands/assign_to_keycache: {}
+      # /mysql/commands/begin: {}
+      # /mysql/commands/binlog: {}
+      # /mysql/commands/call_procedure: {}
+      # /mysql/commands/change_db: {}
+      # /mysql/commands/change_master: {}
+      # /mysql/commands/check: {}
+      # /mysql/commands/checksum: {}
+      # /mysql/commands/commit: {}
+      # /mysql/commands/compound_sql: {}
+      # /mysql/commands/create_db: {}
+      # /mysql/commands/create_event: {}
+      # /mysql/commands/create_function: {}
+      # /mysql/commands/create_index: {}
+      # /mysql/commands/create_procedure: {}
+      # /mysql/commands/create_role: {}
+      # /mysql/commands/create_server: {}
+      # /mysql/commands/create_table: {}
+      # /mysql/commands/create_temporary_table: {}
+      # /mysql/commands/create_trigger: {}
+      # /mysql/commands/create_udf: {}
+      # /mysql/commands/create_user: {}
+      # /mysql/commands/create_view: {}
+      # /mysql/commands/dealloc_sql: {}
+      # /mysql/commands/delete: {}
+      # /mysql/commands/delete_multi: {}
+      # /mysql/commands/do: {}
+      # /mysql/commands/drop_db: {}
+      # /mysql/commands/drop_event: {}
+      # /mysql/commands/drop_function: {}
+      # /mysql/commands/drop_index: {}
+      # /mysql/commands/drop_procedure: {}
+      # /mysql/commands/drop_role: {}
+      # /mysql/commands/drop_server: {}
+      # /mysql/commands/drop_table: {}
+      # /mysql/commands/drop_temporary_table: {}
+      # /mysql/commands/drop_trigger: {}
+      # /mysql/commands/drop_user: {}
+      # /mysql/commands/drop_view: {}
+      # /mysql/commands/empty_query: {}
+      # /mysql/commands/execute_sql: {}
+      # /mysql/commands/flush: {}
+      # /mysql/commands/get_diagnostics: {}
+      # /mysql/commands/grant: {}
+      # /mysql/commands/grant_role: {}
+      # /mysql/commands/ha_close: {}
+      # /mysql/commands/ha_open: {}
+      # /mysql/commands/ha_read: {}
+      # /mysql/commands/help: {}
+      # /mysql/commands/insert: {}
+      # /mysql/commands/insert_select: {}
+      # /mysql/commands/install_plugin: {}
+      # /mysql/commands/kill: {}
+      # /mysql/commands/load: {}
+      # /mysql/commands/lock_tables: {}
+      # /mysql/commands/optimize: {}
+      # /mysql/commands/preload_keys: {}
+      # /mysql/commands/prepare_sql: {}
+      # /mysql/commands/purge: {}
+      # /mysql/commands/purge_before_date: {}
+      # /mysql/commands/release_savepoint: {}
+      # /mysql/commands/rename_table: {}
+      # /mysql/commands/rename_user: {}
+      # /mysql/commands/repair: {}
+      # /mysql/commands/replace: {}
+      # /mysql/commands/replace_select: {}
+      # /mysql/commands/reset: {}
+      # /mysql/commands/resignal: {}
+      # /mysql/commands/revoke: {}
+      # /mysql/commands/revoke_all: {}
+      # /mysql/commands/revoke_role: {}
+      # /mysql/commands/rollback: {}
+      # /mysql/commands/rollback_to_savepoint: {}
+      # /mysql/commands/savepoint: {}
+      # /mysql/commands/select: {}
+      # /mysql/commands/set_option: {}
+      # /mysql/commands/show_authors: {}
+      # /mysql/commands/show_binlog_events: {}
+      # /mysql/commands/show_binlogs: {}
+      # /mysql/commands/show_charsets: {}
+      # /mysql/commands/show_collations: {}
+      # /mysql/commands/show_contributors: {}
+      # /mysql/commands/show_create_db: {}
+      # /mysql/commands/show_create_event: {}
+      # /mysql/commands/show_create_func: {}
+      # /mysql/commands/show_create_proc: {}
+      # /mysql/commands/show_create_table: {}
+      # /mysql/commands/show_create_trigger: {}
+      # /mysql/commands/show_databases: {}
+      # /mysql/commands/show_engine_logs: {}
+      # /mysql/commands/show_engine_mutex: {}
+      # /mysql/commands/show_engine_status: {}
+      # /mysql/commands/show_errors: {}
+      # /mysql/commands/show_events: {}
+      # /mysql/commands/show_explain: {}
+      # /mysql/commands/show_fields: {}
+      # /mysql/commands/show_function_status: {}
+      # /mysql/commands/show_generic: {}
+      # /mysql/commands/show_grants: {}
+      # /mysql/commands/show_keys: {}
+      # /mysql/commands/show_master_status: {}
+      # /mysql/commands/show_open_tables: {}
+      # /mysql/commands/show_plugins: {}
+      # /mysql/commands/show_privileges: {}
+      # /mysql/commands/show_procedure_status: {}
+      # /mysql/commands/show_processlist: {}
+      # /mysql/commands/show_profile: {}
+      # /mysql/commands/show_profiles: {}
+      # /mysql/commands/show_relaylog_events: {}
+      # /mysql/commands/show_slave_hosts: {}
+      # /mysql/commands/show_slave_status: {}
+      # /mysql/commands/show_status: {}
+      # /mysql/commands/show_storage_engines: {}
+      # /mysql/commands/show_table_status: {}
+      # /mysql/commands/show_tables: {}
+      # /mysql/commands/show_triggers: {}
+      # /mysql/commands/show_variables: {}
+      # /mysql/commands/show_warnings: {}
+      # /mysql/commands/shutdown: {}
+      # /mysql/commands/signal: {}
+      # /mysql/commands/start_all_slaves: {}
+      # /mysql/commands/start_slave: {}
+      # /mysql/commands/stop_all_slaves: {}
+      # /mysql/commands/stop_slave: {}
+      # /mysql/commands/truncate: {}
+      # /mysql/commands/uninstall_plugin: {}
+      # /mysql/commands/unlock_tables: {}
+      # /mysql/commands/update: {}
+      # /mysql/commands/update_multi: {}
+      # /mysql/commands/xa_commit: {}
+      # /mysql/commands/xa_end: {}
+      # /mysql/commands/xa_prepare: {}
+      # /mysql/commands/xa_recover: {}
+      # /mysql/commands/xa_rollback: {}
+      # /mysql/commands/xa_start: {}
+      # /mysql/gauge/buffer_pool_bytes_data: {}
+      # /mysql/gauge/buffer_pool_bytes_dirty: {}
+      # /mysql/gauge/buffer_pool_pages_data: {}
+      # /mysql/gauge/buffer_pool_pages_dirty: {}
+      # /mysql/gauge/buffer_pool_pages_free: {}
+      # /mysql/gauge/buffer_pool_pages_misc: {}
+      # /mysql/gauge/buffer_pool_pages_total: {}
+      # /mysql/gauge/file_num_open_files: {}
+      # /mysql/gauge/innodb_activity_count: {}
+      # /mysql/gauge/trx_rseg_history_len: {}
+      # /mysql/handler/commit: {}
+      # /mysql/handler/delete: {}
+      # /mysql/handler/discover: {}
+      # /mysql/handler/external_lock: {}
+      # /mysql/handler/icp_attempts: {}
+      # /mysql/handler/icp_match: {}
+      # /mysql/handler/mrr_init: {}
+      # /mysql/handler/mrr_key_refills: {}
+      # /mysql/handler/mrr_rowid_refills: {}
+      # /mysql/handler/prepare: {}
+      # /mysql/handler/read_first: {}
+      # /mysql/handler/read_key: {}
+      # /mysql/handler/read_last: {}
+      # /mysql/handler/read_next: {}
+      # /mysql/handler/read_prev: {}
+      # /mysql/handler/read_retry: {}
+      # /mysql/handler/read_rnd: {}
+      # /mysql/handler/read_rnd_deleted: {}
+      # /mysql/handler/read_rnd_next: {}
+      # /mysql/handler/rollback: {}
+      # /mysql/handler/savepoint: {}
+      # /mysql/handler/savepoint_rollback: {}
+      # /mysql/handler/tmp_update: {}
+      # /mysql/handler/tmp_write: {}
+      # /mysql/handler/update: {}
+      # /mysql/handler/write: {}
+      # /mysql/innodb_data/fsyncs: {}
+      # /mysql/innodb_data/read: {}
+      # /mysql/innodb_data/reads: {}
+      # /mysql/innodb_data/writes: {}
+      # /mysql/innodb_data/written: {}
+      # /mysql/innodb_dblwr/writes: {}
+      # /mysql/innodb_dblwr/written: {}
+      # /mysql/innodb_log/fsyncs: {}
+      # /mysql/innodb_log/waits: {}
+      # /mysql/innodb_log/write_requests: {}
+      # /mysql/innodb_log/writes: {}
+      # /mysql/innodb_log/written: {}
+      # /mysql/innodb_pages/created: {}
+      # /mysql/innodb_pages/read: {}
+      # /mysql/innodb_pages/written: {}
+      # /mysql/innodb_row_lock/time: {}
+      # /mysql/innodb_row_lock/waits: {}
+      # /mysql/innodb_rows/deleted: {}
+      # /mysql/innodb_rows/inserted: {}
+      # /mysql/innodb_rows/read: {}
+      # /mysql/innodb_rows/updated: {}
+      # /mysql/locks/immediate: {}
+      # /mysql/locks/lock_deadlocks: {}
+      # /mysql/locks/lock_row_lock_current_waits: {}
+      # /mysql/locks/lock_timeouts: {}
+      # /mysql/locks/waited: {}
+      # /mysql/log_position/master-bin: {}
+      # /mysql/log_position/slave-read: {}
+      # /mysql/log_position/slave-exec: {}
+      # /mysql/log_position/time_offset: {}
+      # /mysql/octets/rx: {}
+      # /mysql/octets/tx: {}
+      # /mysql/operations/adaptive_hash_searches: {}
+      # /mysql/operations/buffer_data_reads: {}
+      # /mysql/operations/buffer_data_written: {}
+      # /mysql/operations/buffer_pages_created: {}
+      # /mysql/operations/buffer_pages_read: {}
+      # /mysql/operations/buffer_pages_written: {}
+      # /mysql/operations/buffer_pool_read_ahead: {}
+      # /mysql/operations/buffer_pool_read_ahead_evicted: {}
+      # /mysql/operations/buffer_pool_read_requests: {}
+      # /mysql/operations/buffer_pool_reads: {}
+      # /mysql/operations/buffer_pool_wait_free: {}
+      # /mysql/operations/buffer_pool_write_requests: {}
+      # /mysql/operations/dml_deletes: {}
+      # /mysql/operations/dml_inserts: {}
+      # /mysql/operations/dml_reads: {}
+      # /mysql/operations/dml_updates: {}
+      # /mysql/operations/ibuf_merges_delete: {}
+      # /mysql/operations/ibuf_merges_delete_mark: {}
+      # /mysql/operations/ibuf_merges_discard_delete: {}
+      # /mysql/operations/ibuf_merges_discard_delete_mark: {}
+      # /mysql/operations/ibuf_merges_discard_insert: {}
+      # /mysql/operations/ibuf_merges_insert: {}
+      # /mysql/operations/innodb_dblwr_pages_written: {}
+      # /mysql/operations/innodb_dblwr_writes: {}
+      # /mysql/operations/innodb_rwlock_s_os_waits: {}
+      # /mysql/operations/innodb_rwlock_s_spin_rounds: {}
+      # /mysql/operations/innodb_rwlock_s_spin_waits: {}
+      # /mysql/operations/innodb_rwlock_x_os_waits: {}
+      # /mysql/operations/innodb_rwlock_x_spin_rounds: {}
+      # /mysql/operations/innodb_rwlock_x_spin_waits: {}
+      # /mysql/operations/log_waits: {}
+      # /mysql/operations/log_write_requests: {}
+      # /mysql/operations/log_writes: {}
+      # /mysql/operations/os_data_fsyncs: {}
+      # /mysql/operations/os_data_reads: {}
+      # /mysql/operations/os_data_writes: {}
+      # /mysql/operations/os_log_bytes_written: {}
+      # /mysql/operations/os_log_fsyncs: {}
+      # /mysql/operations/os_log_pending_fsyncs: {}
+      # /mysql/operations/os_log_pending_writes: {}
+      # /mysql/queries/total: {}
+      # /mysql/select/full_join: {}
+      # /mysql/select/full_range_join: {}
+      # /mysql/select/range: {}
+      # /mysql/select/range_check: {}
+      # /mysql/select/scan: {}
+      # /mysql/slow/queries: {}
+      # /mysql/sort/merge_passes: {}
+      # /mysql/sort/priority_queue_sorts: {}
+      # /mysql/sort/range: {}
+      # /mysql/sort/rows: {}
+      # /mysql/sort/scan: {}
+      # /mysql/threads/cached: {}
+      # /mysql/threads/connected: {}
+      # /mysql/threads/running: {}
+      # /mysql/total_threads/created: {}
+      # /mysql/uptime/total: {}
+      # /mysql/uptime/since_flush_status: {}
+    publish:
+      - plugin_name: publisher-appoptics
+        config:
+          period: 60
+          floor_seconds: 60

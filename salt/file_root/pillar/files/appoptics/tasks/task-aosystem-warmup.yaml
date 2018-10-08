@@ -1,0 +1,18 @@
+---
+version: 1
+schedule:
+  # Send a metric every second for 10 times
+  type: "simple"
+  interval: "1s"
+  count: 10
+workflow:
+  collect:
+    metrics:
+      /system/mem/total: {}
+    tags:
+      /system/mem/total:
+          dropthismetric: "true"
+    publish:
+      - plugin_name: publisher-appoptics
+        config:
+          ignore_init_tag: "dropthismetric"

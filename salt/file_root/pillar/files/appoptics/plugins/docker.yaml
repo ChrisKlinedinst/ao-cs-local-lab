@@ -1,0 +1,20 @@
+collector:
+  docker:
+    all:
+      # endpoint is a required setting, it should be set to the Docker API endpoint where the daemon listens for requests.
+      # example for a tcp socket
+      # endpoint: "tcp://docker:2375"
+      # example for a unix domain socket, this is the default
+      endpoint: "unix:///var/run/docker.sock"
+      procfs: "/proc"
+
+      # grpc_timeout sets the maximum time allowed for a gRPC call. 
+      # Some collector or plublisher plugins require more time to finish a gRPC method call during collection or publishing.
+      # When increasing grpc_timeout value with the deadline value specified in
+      # manifest task file which controls the total time allocated for the 
+      # Default value is 10
+      grpc_timeout: 30
+
+load:
+  plugin: snap-plugin-collector-aodocker
+  task: task-aodocker.yaml

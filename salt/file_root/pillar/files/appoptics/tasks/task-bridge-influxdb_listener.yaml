@@ -1,0 +1,17 @@
+---
+version: 1
+schedule:
+  type: "streaming"
+workflow:
+  collect:
+    metrics:
+      /influxdb_listener/*/all: {}
+    config:
+      /influxdb_listener:
+        MaxCollectDuration: "60s"
+        MaxMetricsBuffer: 1000
+    publish:
+      - plugin_name: publisher-appoptics
+        config:
+          period: 60
+          floor_seconds: 60
