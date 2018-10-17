@@ -1,5 +1,5 @@
 #!/user/bin/env python3
-import os, sys, subprocess, string
+import os, sys, subprocess, string, re
 from random import randint
 
 path = os.getcwd()
@@ -7,12 +7,12 @@ path = os.getcwd()
 #prompt for OS, default will be ubun
 box = str(raw_input("Enter a Vagrant Box Name \n default is ubuntu 14 \n for latest release use short names (ubuntu or centos) \n for a full list of availalbe boxes see https://app.vagrantup.com/boxes/search \n Box Name: "))
 if box is '':
-    box = 'ubuntu/trusty64'
-    print('building with Ubuntu 14.04')
+    box = 'ubuntu/xenial64'
+    print('building with Ubuntu 16.04')
 
 elif box == 'ubuntu':
-        box = 'ubuntu/xenial64'
-        print('building with Ubuntu 16.04')
+        box = 'ubuntu/bionic64'
+        print('building with Ubuntu 18.04')
 
 elif box == 'centos':
     box = 'centos/7'
@@ -21,7 +21,8 @@ elif box == 'centos':
 #prompt for hostname, default will be box+4 random nums
 hostname = str(raw_input("Hostname for VM: "))
 if hostname is '':
-    hostname = 'lab-'+box[:6]+'-'+str(randint(0, 999))
+    ###should remove special chars from name.
+    hostname = 'lab-'+re.sub('[^A-Za-z0-9]+', '', box[:6])+'-'+str(randint(0, 999))
     print('Hostname will be '+hostname)
 
 
@@ -70,7 +71,7 @@ vmconf.write('  config.vm.network "private_network", type: "dhcp"\n')
 
 #map local shares
 vmconf.write('  #map local shares\n')
-vmconf.write('  config.vm.synced_folder "../../salt/file_root/pillar", "/srv/salt"\n')
+vmconf.write('  config.vm.synced_folder "../../saltstack/file_root/salt", "/srv/salt"\n')
 vmconf.write('  config.vm.synced_folder "share", "/srv/share"\n')
 vmconf.write('  config.vm.synced_folder "../../containers", "/srv/containers"\n')
 
@@ -78,6 +79,8 @@ vmconf.write('  config.vm.synced_folder "../../containers", "/srv/containers"\n'
 
 if 'centos' in box:
     vmconf.write('  #enable networking on centos minimal distros\n  config.vm.provision "shell", inline: <<-SHELL\n    sudo systemctl enable NetworkManager\n    sudo systemctl start NetworkManager\n  SHELL\n')
+
+##centos 67 does not have correct vbox addons, we will need to script install.
 
 #add Virtual Box config lines
 vmconf.write('  #virtualbox configuration\n')
@@ -97,7 +100,7 @@ os.chmod("hosts/"+hostname+"/.keys/salt/"+hostname+".pem", 0o644)
 #subprocess.call('cd '+path+' && '+cmd, shell=True)
 
 #import salt keys
-vmconf.write('  salt.minion_config = "../../salt/config/minion"\n')
+vmconf.write('  salt.minion_config = "../../saltstack/config/minion"\n')
 vmconf.write('  salt.minion_id = "'+hostname+'"\n')
 vmconf.write('  salt.minion_key = ".keys/salt/'+hostname+'.pem"\n')
 vmconf.write('  salt.minion_pub = ".keys/salt/'+hostname+'.pub"\n')

@@ -2,11 +2,8 @@
 getdocker:
   cmd.run:
     - name: sudo bash -c "$(curl -sSLk https://get.docker.com -o get-docker.sh)" && sudo sh get-docker.sh
-#    - RunScript: sudo sh get-docker.sh
-
-getdockercompose:
-  cmd.run:
-    - name: sudo curl -kL "https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  pkg.installed:
+    - name: python-docker
 
 #start services
 docker:

@@ -9,8 +9,8 @@ mesos:
   pkg.installed:
     - name: mesos
   service.running:
-    - name: mesos-master
-#      - mesos-slave
+    - name: mesos-slave
+
   {% elif grains['os'] == 'CentOS' %}
   cmd.run:
     - name: sudo bash -c "http://repos.mesosphere.io/el/7/noarch/RPMS/mesosphere-el-repo-7-1.noarch.rpm"

@@ -6,8 +6,12 @@ path = os.getcwd()
 
 token = str(raw_input("enter your AppOptics token\n you can find a list of available tokens here: https://my.appoptics.com/organization/tokens :"))
 
-vmconf = open("salt/states/pillar/ao_token.sls", 'a')
-vmconf.write("aotoken_env:\n  environ.setenv:\n    - name: APPOPTICS_API_TOKEN\n    - value: "+token+"\n")
+vmconf = open("saltstack/pillar/hosts.sls", 'a')
+vmconf.write("aotoken_env: "+token+"\n")
+
+##verify vbox version
+
+##verify docker version
 
 print("Installing VBox Guest Additions")
 p = subprocess.Popen(['vagrant', 'plugin', 'install', 'vagrant-vbguest'], cwd=path)

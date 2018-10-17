@@ -19,34 +19,34 @@ workflow:
       /mysql/created/tmp_disk_tables: {}
       /mysql/created/tmp_tables: {}
       /mysql/created/tmp_files: {}
-      /mysql/gauge/buffer_pool_pages_data: {}
-      /mysql/gauge/buffer_pool_pages_dirty: {}
-      /mysql/gauge/buffer_pool_pages_free: {}
-      /mysql/gauge/buffer_pool_pages_misc: {}
-      /mysql/innodb_data/fsyncs: {}
-      /mysql/innodb_data/reads: {}
-      /mysql/innodb_data/writes: {}
-      /mysql/innodb_log/writes: {}
-      /mysql/innodb_pages/created: {}
-      /mysql/innodb_pages/read: {}
-      /mysql/innodb_pages/written: {}
-      /mysql/innodb_rows/deleted: {}
-      /mysql/innodb_rows/inserted: {}
-      /mysql/innodb_rows/read: {}
-      /mysql/innodb_rows/updated: {}
-      /mysql/innodb_row_lock/time: {}
-      /mysql/innodb_row_lock/waits: {}
+      #/mysql/gauge/buffer_pool_pages_data: {}
+      #/mysql/gauge/buffer_pool_pages_dirty: {}
+      #/mysql/gauge/buffer_pool_pages_free: {}
+      #/mysql/gauge/buffer_pool_pages_misc: {}
+      #/mysql/innodb_data/fsyncs: {}
+      #/mysql/innodb_data/reads: {}
+      #/mysql/innodb_data/writes: {}
+      #/mysql/innodb_log/writes: {}
+      #/mysql/innodb_pages/created: {}
+      #/mysql/innodb_pages/read: {}
+      #/mysql/innodb_pages/written: {}
+      #/mysql/innodb_rows/deleted: {}
+      #/mysql/innodb_rows/inserted: {}
+      #/mysql/innodb_rows/read: {}
+      #/mysql/innodb_rows/updated: {}
+      #/mysql/innodb_row_lock/time: {}
+      #/mysql/innodb_row_lock/waits: {}
       /mysql/locks/immediate: {}
-      /mysql/locks/lock_deadlocks: {}
+      #/mysql/locks/lock_deadlocks: {}
       /mysql/locks/waited: {}
       /mysql/octets/rx: {}
       /mysql/octets/tx: {}
-      /mysql/operations/buffer_pool_read_requests: {}
-      /mysql/operations/buffer_pool_reads: {}
-      /mysql/operations/buffer_pool_wait_free: {}
-      /mysql/operations/innodb_rwlock_s_spin_rounds: {}
-      /mysql/operations/innodb_rwlock_s_spin_waits: {}
-      /mysql/operations/innodb_rwlock_x_os_waits: {}
+      #/mysql/operations/buffer_pool_read_requests: {}
+      #/mysql/operations/buffer_pool_reads: {}
+      #/mysql/operations/buffer_pool_wait_free: {}
+      #/mysql/operations/innodb_rwlock_s_spin_rounds: {}
+      #/mysql/operations/innodb_rwlock_s_spin_waits: {}
+      #/mysql/operations/innodb_rwlock_x_os_waits: {}
       /mysql/threads/cached: {}
       /mysql/threads/connected: {}
       /mysql/threads/running: {}
