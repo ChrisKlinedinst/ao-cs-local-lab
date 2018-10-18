@@ -9,6 +9,8 @@ token = str(raw_input("enter your AppOptics token\n you can find a list of avail
 vmconf = open("saltstack/pillar/hosts.sls", 'a')
 vmconf.write("aotoken_env: "+token+"\n")
 
+##github token
+
 ##verify vbox version
 
 ##verify docker version

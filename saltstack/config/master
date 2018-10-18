@@ -311,7 +311,7 @@ grains:
 # Example:
 file_roots:
   base:
-    - /srv/salt/pillar
+    - /srv/salt
 #   dev:
 #     - /srv/salt/dev/services
 #     - /srv/salt/dev/states
