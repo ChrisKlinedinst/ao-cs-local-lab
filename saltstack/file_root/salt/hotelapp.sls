@@ -6,7 +6,7 @@ booking-service:
     - image: appoptics/demo-booking-service:with-data
     - hostname: booking-service
     - environment:
-      - APPOPTICS_SERVICE_KEY: {{ ao_token }}:demo-booking-service
+      - APPOPTICS_SERVICE_KEY: {{ ao_token }}:hotelapp-booking-service
     - extra_hosts:
       - booking.neta-suites.com:127.0.0.1
       - db.neta-suites.com:127.0.0.1
@@ -24,7 +24,7 @@ web-tier:
       - booking-service
     - environment:
       - ROBBOSS_SERVICE_BOOKING_URL: http://booking.neta-suites.com:8080
-      - APPOPTICS_SERVICE_KEY: {{ ao_token }}:demo-web-tier
+      - APPOPTICS_SERVICE_KEY: {{ ao_token }}:hotelapp-web-tier
     - extra_hosts:
       - neta-suites.com:127.0.0.1
 
@@ -43,7 +43,7 @@ api:
     - depends_on:
       - booking-service
     - environment:
-      - APPOPTICS_SERVICE_KEY: {{ ao_token }}:demo-api
+      - APPOPTICS_SERVICE_KEY: {{ ao_token }}:hotelapp-api
 
   #
   #demo.load-gen (uses cron and apache bench to generate traffic)

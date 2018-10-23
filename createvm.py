@@ -10,6 +10,9 @@ if box is '':
     box = 'ubuntu/xenial64'
     print('building with Ubuntu 16.04')
 
+elif box == 'windows'
+        box ='opentable/win-2012r2-standard-amd64-nocm'
+        print('building with Windows 2012R2 Standard')
 elif box == 'ubuntu':
         box = 'ubuntu/bionic64'
         print('building with Ubuntu 18.04')

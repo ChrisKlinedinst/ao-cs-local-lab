@@ -2,17 +2,6 @@
 
 This project creates VMs and Containers for testing AppOptics agents
 
-## Supported Platforms
-
-* RHEL 6 / CentOS 6
-* RHEL 7 / CentOS 7
-* Ubuntu 14.04 (no docker salt support)
-* Ubuntu 15.04
-* Ubuntu 15.10
-* Ubuntu 16.04
-* Ubuntu 18.04
-* Debian 7
-* Debian 8
 
 ##Usage
 
@@ -22,7 +11,14 @@ You can run salt states by using the following commands:
 
 Saltmaster as container
 
+docker exec saltmaster sudo salt 'lab*' state.apply mystate.sls
+
 Saltmaster as VM
+
+vagrant ssh -c 'sudo salt 'lab*' state.apply mystate.sls'
+
+###List of available states
+
 
 
 ## Setup
@@ -31,15 +27,11 @@ Run setup.py
 
 ###Saltmaster
 
-The Salt Master host can be configured as a Container using a local Docker instance or as its own VM on Ubuntu 14.04.
+The Salt Master runs on its own VM named Saltmaster. This VM lives in the Hosts directory and has the IP 172.28.128.50 for the Host-Only interface.
 
 ### AO_TOKEN
 
- The same API token is passed to all agents from Salt
-
-### Github keys
-
-Github keys are stored encrypted in Salt states and passed to hosts for using Git SSH client. This is not required and can be skipped.
+ The same API token is passed to all agents from Salt using a pillar variable.
 
 ##Creating VMs
 
@@ -47,15 +39,15 @@ You can create a new VM by running the createvm.py script.
 
 ###Vagrant Box hostname
 
-This is the name of the Vagrant Image that the VM will be built on. If no box is entered the VM will be build using Ubuntu 16.04. The short names Centos and Ubuntu can be used to build with latest release. For a full list of available images see https://app.vagrantup.com/boxes/search.
+This is the name of the Vagrant Image that the VM will be built on. If no box is entered the VM will be build using Ubuntu 16.04. The short names Windows, Centos, and Ubuntu can be used to build with latest release. For a full list of available images see https://app.vagrantup.com/boxes/search.
 
 ###Hostname
 
-This will be the Hostname for the VM. If nothing is entered a name will be created (ex: lab-boaxname-123)
+This will be the Hostname for the VM. If nothing is entered a name will be created (ex: lab-boxname-123)
 
 ###Memory
 
-The amount of memory for the VM. You will need at least 512 to run most Salt states and 2048 to run Contianers
+The amount of memory for the VM. You will need at least 512 to run most Salt states and 2048 to run the sample APM Contianers
 
 ###Docker
 
