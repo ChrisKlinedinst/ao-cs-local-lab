@@ -17,7 +17,16 @@ Saltmaster as VM
 
 vagrant ssh -c 'sudo salt 'lab*' state.apply mystate.sls'
 
-###List of available states
+### List of available states
+
+ * Apache
+ * collectd
+ * docker
+ * mysql
+ * k8s
+ * mesos
+ * hotelapp (sample APM containers)
+ * host agent
 
 
 
