@@ -1,11 +1,12 @@
-{% set AO_TOKEN = 'f298b2330074fdd1ab4d85caca21cbc5fb312223a822d030dd202536afb9b297' %}
-
 base:
   '*':
     - ao_token
 
-  'G@type:host':
-    - ao_host_agent
+  'G@kernel:Linux':
+    - ao_linux_host_agent
 
-  'G@roles:docker':
-    - docker
+  #'G@kernel:Windows':
+  #  - ao_windows_host_agent
+
+  #'G@roles:docker':
+  #  - docker

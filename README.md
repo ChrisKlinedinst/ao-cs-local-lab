@@ -9,26 +9,26 @@ This project creates VMs and Containers for testing AppOptics agents
 
 You can run salt states by using the following commands:
 
-Saltmaster as container
+hosts/salmaster$ vagrant ssh -c 'sudo salt 'lab*' state.apply mystate.sls'
 
-docker exec saltmaster sudo salt 'lab*' state.apply mystate.sls
+This will apply the mystate state to any system who's hostname begins with lab.
 
-Saltmaster as VM
+The minionid supports globs and grains:
+https://docs.saltstack.com/en/latest/topics/targeting/globbing.html
 
-vagrant ssh -c 'sudo salt 'lab*' state.apply mystate.sls'
+more info on running salt states: https://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.state.html
 
 ### List of available states
+
+Salt States are stored in the saltstack/file_root/salt directory or in /srv/salt on each host. 
 
  * Apache
  * collectd
  * docker
  * mysql
- * k8s
  * mesos
  * hotelapp (sample APM containers)
  * host agent
-
-
 
 ## Setup
 

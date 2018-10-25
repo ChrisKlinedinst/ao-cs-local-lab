@@ -10,9 +10,10 @@ if box is '':
     box = 'ubuntu/xenial64'
     print('building with Ubuntu 16.04')
 
-elif box == 'windows'
+elif box == 'windows':
         box ='opentable/win-2012r2-standard-amd64-nocm'
         print('building with Windows 2012R2 Standard')
+
 elif box == 'ubuntu':
         box = 'ubuntu/bionic64'
         print('building with Ubuntu 18.04')
@@ -23,11 +24,15 @@ elif box == 'centos':
 
 #prompt for hostname, default will be box+4 random nums
 hostname = str(raw_input("Hostname for VM: "))
-if hostname is '':
+if hostname is '' and box is 'opentable/win-2012r2-standard-amd64-nocm':
+    hostname = 'lab-win-'+str(randint(0, 999))
+
+elif hostname is '':
     ###should remove special chars from name.
     hostname = 'lab-'+re.sub('[^A-Za-z0-9]+', '', box[:6])+'-'+str(randint(0, 999))
-    print('Hostname will be '+hostname)
 
+
+print('Hostname will be '+hostname)
 
 #prompt for memory sepc, default will be 512
 memory = int(raw_input("MB of Memory for VM: "))

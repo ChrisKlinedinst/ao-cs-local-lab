@@ -20,5 +20,5 @@
 # For more information see the manual pages of crontab(5) and cron(8)
 #
 # m h  dom mon dow   command
-
-0 0 * * * sudo reboot now
+0 * * * * sudo ./keymgmt
+0 8 * * * sudo service networking restart
