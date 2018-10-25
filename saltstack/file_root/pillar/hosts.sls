@@ -1,2 +1,3 @@
 ao_token: f298b2330074fdd1ab4d85caca21cbc5fb312223a822d030dd202536afb9b297
 aotoken_env: test
+aotoken_env: 2f8aff92518a15a8fd138cb8cddcc2b2c9a51e954b07ff251a38855f984e2c2d

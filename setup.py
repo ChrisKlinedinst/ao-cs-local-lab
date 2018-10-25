@@ -21,5 +21,9 @@ elif vbox:
     print("remove default VBox DHCP server")
     p = subprocess.Popen(['VBoxManage', 'dhcpserver', 'remove', '--netname', 'HostInterfaceNetworking-vboxnet0'], cwd=path)
 
+#start saltmaster
+path = os.getcwd()+'/hosts/saltmaster'
+cmd = "vagrant up"
+subprocess.call('cd '+path+' && '+cmd, shell=True)
 
 sys.exit(0)
