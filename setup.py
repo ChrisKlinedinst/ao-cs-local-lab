@@ -21,20 +21,5 @@ elif vbox:
     print("remove default VBox DHCP server")
     p = subprocess.Popen(['VBoxManage', 'dhcpserver', 'remove', '--netname', 'HostInterfaceNetworking-vboxnet0'], cwd=path)
 
-##verify docker version
-#docker = subprocess.Popen(['VBoxManage','--version'], cwd=path)
-
-##prompt for saltmaster as container
-#if not docker:
-#    saltdocker = str(raw_input("By default the saltmaster is installed as a VM, would you like to run it as a docker container instead?"))
-
-#if saltdocker is 'no' or 'n':
-#    #start saltmaster as VM
-#    print("Starting VM saltmaster")
-#    path = os.getcwd()+'/hosts/saltmaster'
-#    cmd = 'vagrant up'
-#    p = subprocess.Popen(['vagrant', 'up'], cwd=path)
-
-#elif saltdocker is 'yes' or 'y'
 
 sys.exit(0)
