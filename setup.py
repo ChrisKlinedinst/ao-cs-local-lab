@@ -6,9 +6,9 @@ path = os.getcwd()
 
 token = str(raw_input("enter your AppOptics token\n you can find a list of available tokens here: https://my.appoptics.com/organization/tokens:"))
 
-vmconf = open("saltstack/file_root/pillar/appoptics.sls", 'a')
-
-vmconf.write("ao_token: "+token+"\n")
+aosalt = open("saltstack/file_root/pillar/appoptics.sls", 'w')
+aosalt.write("ao_token: "+token+"\n")
+aosalt.close()
 
 ##verify vbox version
 vbox = subprocess.Popen(['VBoxManage','--version'], cwd=path)
