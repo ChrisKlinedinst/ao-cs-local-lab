@@ -81,10 +81,8 @@ vmconf.write('  config.vm.network "private_network", type: "dhcp"\n')
 vmconf.write('  #map local shares\n')
 vmconf.write('  config.vm.synced_folder "../../saltstack/file_root/salt", "/srv/salt"\n')
 vmconf.write('  config.vm.synced_folder "share", "/srv/share"\n')
-vmconf.write('  config.vm.synced_folder "../../containers", "/srv/containers"\n')
 
 #enable networking on centos
-
 if 'centos' in box:
     vmconf.write('  #enable networking on centos minimal distros\n  config.vm.provision "shell", inline: <<-SHELL\n    sudo systemctl enable NetworkManager\n    sudo systemctl start NetworkManager\n  SHELL\n')
 

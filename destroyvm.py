@@ -13,10 +13,7 @@ if hostname is '':
 #prompt for OS, default will be ubun
 confirm = str(raw_input("Are you sure you want to destroy this VM?: "))
 
-if confirm is 'no' or 'n':
-    sys.exit(0)
-
-elif confirm is 'yes' or 'y':
+if confirm is 'yes' or 'y':
     print("Destroying VM "+hostname)
     path = os.getcwd()+'/hosts/'+hostname
     cmd = 'vagrant up'

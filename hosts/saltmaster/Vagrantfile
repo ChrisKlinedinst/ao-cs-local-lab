@@ -1,6 +1,6 @@
 Vagrant.configure("2") do |config|
   #Vagrant Image to use
-  config.vm.box = "ubuntu/xenial64"
+  config.vm.box = "centos/7"
   #hostname for vm
   config.vm.hostname = "saltmaster"
   #network configuration
