@@ -20,26 +20,26 @@ mysql:
 #configure appoptics mysql plugin
 ao_plugin_file:
   file.managed:
-    - name: /opt/appoptics/etc/plugins.d/mysql.yaml
+    - name: /opt/SolarWinds/Snap/etc/plugins.d/mysql.yaml
     - source: salt://files/appoptics/plugins/mysql.yaml
-    - user: appoptics
-    - group: appoptics
+    - user: solarwinds
+    - group: solarwinds
     - mode: 644
   service.running:
-    - name: appoptics-snapteld
+    - name: swisnapd
     - restart: True
     - watch:
-      - file: /opt/appoptics/etc/plugins.d/mysql.yaml
+      - file: /opt/SolarWinds/Snap/etc/plugins.d/mysql.yaml
 
 ao_task_file:
   file.managed:
-    - name: /opt/appoptics/etc/tasks.d/task-aomysql.yaml
+    - name: /opt/SolarWinds/Snap/etc/tasks.d/task-aomysql.yaml
     - source: salt://files/appoptics/tasks/task-aomysql.yaml
-    - user: appoptics
-    - group: appoptics
+    - user: solarwinds
+    - group: solarwinds
     - mode: 644
   service.running:
-    - name: appoptics-snapteld
+    - name: swisnapd
     - restart: True
     - watch:
-      - file: /opt/appoptics/etc/tasks.d/task-aomysql.yaml
+      - file: /opt/SolarWinds/Snap/etc/tasks.d/task-aomysql.yaml

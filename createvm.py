@@ -98,18 +98,17 @@ vmconf.write('  config.vm.provision :salt do |salt|\n  salt.install_type = "stab
 
 #generate salt keys
 print("Creating Salt Keys")
-path = os.getcwd()+'/hosts/saltmaster'
-cmd = "vagrant ssh -c 'sudo salt-key --gen-keys="+hostname+" --gen-keys-dir=/srv/hosts/"+hostname+"/.keys/salt/ && sudo cp -p /srv/hosts/"+hostname+"/.keys/salt/"+hostname+".pub /etc/salt/pki/master/minions/"+hostname+"'"
-subprocess.call('cd '+path+' && '+cmd, shell=True)
-os.chmod("hosts/"+hostname+"/.keys/salt/"+hostname+".pem", 0o644)
-#cmd = "vagrant ssh -c 'sudo cp --no-preserve=662 /srv/hosts/"+hostname+"/.keys/salt/"+hostname+".pub /etc/salt/pki/master/minions/"+hostname+".pub'"
-#subprocess.call('cd '+path+' && '+cmd, shell=True)
+cmd = "docker exec saltmaster salt-key --gen-keys="+hostname+" --gen-keys-dir=/etc/salt/keygen && docker exec saltmaster cp -p /etc/salt/keygen/"+hostname+".pub /etc/salt/pki/master/minions/"+hostname+""
+subprocess.call(cmd, shell=True)
+#update permissions on keys
+os.chmod("saltstack/config/keygen/"+hostname+".pem", 0o644)
+
 
 #import salt keys
-vmconf.write('  salt.minion_config = "../../saltstack/config/minion"\n')
+vmconf.write('  salt.minion_config = "../../saltstack/config/master.d/minion"\n')
 vmconf.write('  salt.minion_id = "'+hostname+'"\n')
-vmconf.write('  salt.minion_key = ".keys/salt/'+hostname+'.pem"\n')
-vmconf.write('  salt.minion_pub = ".keys/salt/'+hostname+'.pub"\n')
+vmconf.write('  salt.minion_key = "../../saltstack/config/keygen/'+hostname+'.pem"\n')
+vmconf.write('  salt.minion_pub = "../../saltstack/config/keygen/'+hostname+'.pub"\n')
 vmconf.write('  salt.run_highstate = true\n')
 
 vmconf.write('end\n config.vm.post_up_message = "press enter to complete setup..."\nend')

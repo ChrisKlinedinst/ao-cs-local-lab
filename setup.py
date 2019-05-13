@@ -4,6 +4,9 @@ import os, sys, subprocess, string
 
 path = os.getcwd()
 
+#set lab home path
+os.environ["LAB_HOME"] = path
+
 token = str(raw_input("enter your AppOptics token\n you can find a list of available tokens here: https://my.appoptics.com/organization/tokens:"))
 
 aosalt = open("saltstack/file_root/pillar/appoptics.sls", 'w')
@@ -22,9 +25,12 @@ elif vbox:
     print("remove default VBox DHCP server")
     p = subprocess.Popen(['VBoxManage', 'dhcpserver', 'remove', '--netname', 'HostInterfaceNetworking-vboxnet0'], cwd=path)
 
+#build saltmaster image
+cmd = "docker build -t samtmaster ."
+subprocess.call(cmd, shell=True)
+
 #start saltmaster
-path = os.getcwd()+'/hosts/saltmaster'
-cmd = "vagrant up"
-subprocess.call('cd '+path+' && '+cmd, shell=True)
+cmd = "docker run -v $LAB_HOME/hosts:/srv/hosts -v $LAB_HOME/saltstack/config/:/etc/salt/ -v $LAB_HOME/saltstack/file_root/:/srv -p 4505:4505 -p 4506:4506 -d --name saltmaster saltmaster /etc/salt/startup.sh"
+subprocess.call(cmd, shell=True)
 
 sys.exit(0)
