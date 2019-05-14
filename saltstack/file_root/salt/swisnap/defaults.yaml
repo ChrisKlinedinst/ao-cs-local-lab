@@ -1,0 +1,25 @@
+swisnap:
+  repo_base: 'swisnap'
+  repo_url: 'https://packagecloud.io/solarwinds/'
+  config_base: '/opt/SolarWinds/Snap/etc'
+  plugin_bin_path: '/opt/SolarWinds/Snap/bin'
+  plugin_config_path: '/opt/SolarWinds/Snap/etc/plugins.d'
+  task_config_path: '/opt/SolarWinds/Snap/etc/tasks.d'
+  autoload_path: '/opt/SolarWinds/Snap/autoload'
+  plugin_load_timeout: 30
+  hostname: nil
+  fqdn_lookup: true
+  interval: 60
+  listen_port: 8082
+  max_plugin_restarts: -1
+  api_url: 'https://api.appoptics.com/v1/measurements'
+  
+  logging:
+    use_log_file: true
+    log_file:
+      log_level: '3'
+      log_path: '/var/log/SolarWinds/Snap'
+      filename: 'swisnapd.log'
+
+  configured_plugins: []
+  configured_tasks: []

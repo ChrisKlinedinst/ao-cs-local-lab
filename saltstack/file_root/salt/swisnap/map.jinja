@@ -1,0 +1,53 @@
+{## Start with defaults from defaults.yaml ##}
+{% import_yaml 'swisnap/defaults.yaml' as default_settings %}
+
+{##
+Setup variable using grains['os'] based logic, only add key:values here
+that differ from whats in defaults.yaml
+##}
+{% set os_map = salt['grains.filter_by']({
+        'Debian': {
+            'version': 'latest',
+            'repo_base': 'swisnap',
+            'platform': 'debian',
+            'dist': grains['oscodename']
+        },
+        'Ubuntu': {
+            'version': 'latest',
+            'repo_base': 'swisnap',
+            'platform': 'ubuntu',
+            'dist': grains['oscodename']
+        },
+        'Amazon': {
+            'version': 'latest',
+            'repo_base': 'swisnap',
+            'repo_release': '6',
+            'distro': 'el'
+        },
+        'Fedora': {
+            'version': 'latest',
+            'repo_base': 'swisnap',
+            'repo_release': '$releasever',
+            'distro': 'fedora'
+        },
+        'RedHat': {
+            'version': 'latest',
+            'repo_base': 'swisnap',
+            'repo_release': '$releasever',
+            'distro': 'el'
+        },
+        'CentOS': {
+            'version': 'latest',
+            'repo_base': 'swisnap',
+            'repo_release': '$releasever',
+            'distro': 'el'
+        }
+  }, grain="os", merge=salt['pillar.get']('swisnap:lookup'))
+%}
+
+{## Merge the flavor_map to the default settings ##}
+{% do default_settings.swisnap.update(os_map) %}
+
+{## Merge in swisnap:lookup pillar ##}
+{% set swisnap = salt['pillar.get']('swisnap', default=default_settings.swisnap, merge=True)
+%}

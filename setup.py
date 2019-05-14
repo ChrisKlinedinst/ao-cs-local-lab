@@ -25,8 +25,14 @@ elif vbox:
     print("remove default VBox DHCP server")
     p = subprocess.Popen(['VBoxManage', 'dhcpserver', 'remove', '--netname', 'HostInterfaceNetworking-vboxnet0'], cwd=path)
 
+#verify docker is installed
+docker = subprocess.Popen(['docker','--version'], cwd=path)
+
+if not docker:
+	print ("Docker is not installed, https://docs.docker.com/v17.12/install/")
+
 #build saltmaster image
-cmd = "docker build -t samtmaster ."
+cmd = "docker build -t saltmaster ."
 subprocess.call(cmd, shell=True)
 
 #start saltmaster
