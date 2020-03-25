@@ -14,6 +14,7 @@ aosalt.write("ao_token: "+token+"\n")
 aosalt.close()
 
 ##verify vbox version
+##every subprocess needs rescue message
 vbox = subprocess.Popen(['VBoxManage','--version'], cwd=path)
 
 if not vbox:

@@ -42,26 +42,26 @@ apache2:
 #configure appoptics apache plugin
 ao_plugin_file:
   file.managed:
-    - name: /opt/appoptics/etc/plugins.d/apache.yaml
+    - name: /opt/SolarWinds/Snap/etc/plugins.d/apache.yaml
     - source: salt://files/appoptics/plugins/apache.yaml
-    - user: appoptics
-    - group: appoptics
+    - user: solarwinds
+    - group: solarwinds
     - mode: 644
   service.running:
-    - name: appoptics-snapteld
+    - name: swisnapd
     - restart: True
     - watch:
-      - file: /opt/appoptics/etc/plugins.d/apache.yaml
+      - file: /opt/SolarWinds/Snap/etc/plugins.d/apache.yaml
 
 ao_task_file:
   file.managed:
-    - name: /opt/appoptics/etc/tasks.d/task-aoapache.yaml
+    - name: /opt/SolarWinds/Snap/etc/tasks.d/task-aoapache.yaml
     - source: salt://files/appoptics/tasks/task-aoapache.yaml
-    - user: appoptics
-    - group: appoptics
+    - user: solarwinds
+    - group: solarwinds
     - mode: 644
   service.running:
-    - name: appoptics-snapteld
+    - name: swisnapd
     - restart: True
     - watch:
-      - file: /opt/appoptics/etc/tasks.d/task-aoapache.yaml
+      - file: /opt/SolarWinds/Snap/etc/tasks.d/task-aoapache.yaml
