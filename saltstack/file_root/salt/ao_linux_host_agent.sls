@@ -2,4 +2,4 @@
 
 run_installer:
   cmd.run:
-    - name: sudo bash -c "$(curl -sSO https://files.solarwinds.cloud/solarwinds-snap-agent-installer.sh)" -s --token {{ ao_token }}
+    - name: sudo bash -c "$(curl -sSO https://files.solarwinds.cloud/solarwinds-snap-agent-installer.sh)" -s --token {{ ao_token }} --yes

@@ -26,26 +26,26 @@ collectd_service:
 #configure appoptics apache plugin
 ao_plugin_file:
   file.managed:
-    - name: /opt/appoptics/etc/plugins.d/collectd_listener.yaml
+    - name: /opt/SolarWinds/Snap/etc/plugins.d/collectd_listener.yaml
     - source: salt://files/appoptics/plugins/collectd_listener.yaml
-    - user: appoptics
-    - group: appoptics
+    - user: solarwinds
+    - group: solarwinds
     - mode: 644
   service.running:
-    - name: appoptics-snapteld
+    - name: swisnapd
     - restart: True
     - watch:
-      - file: /opt/appoptics/etc/plugins.d/collectd_listener.yaml
+      - file: /opt/SolarWinds/Snap/etc/plugins.d/collectd_listener.yaml
 
 ao_task_file:
   file.managed:
-    - name: /opt/appoptics/etc/tasks.d/task-bridge-collectd_listener.yaml
+    - name: /opt/SolarWinds/Snap/etc/tasks.d/task-bridge-collectd_listener.yaml
     - source: salt://files/appoptics/tasks/task-bridge-collectd_listener.yaml
     - user: appoptics
     - group: appoptics
     - mode: 644
   service.running:
-    - name: appoptics-snapteld
+    - name: swisnapd
     - restart: True
     - watch:
-      - file: /opt/appoptics/etc/tasks.d/task-bridge-collectd_listener.yaml
+      - file: /opt/SolarWinds/Snap/etc/tasks.d/task-bridge-collectd_listener.yaml

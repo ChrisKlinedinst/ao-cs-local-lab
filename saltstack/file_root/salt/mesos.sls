@@ -25,26 +25,26 @@ mesos:
 
 ao_plugin_file:
   file.managed:
-    - name: /opt/appoptics/etc/plugins.d/mesos.yaml
+    - name: /opt/SolarWinds/Snap/etc/plugins.d/mesos.yaml
     - source: salt://files/appoptics/plugins/mesos.yaml
-    - user: appoptics
-    - group: appoptics
+    - user: solarwinds
+    - group: solarwinds
     - mode: 644
   service.running:
-    - name: appoptics-snapteld
+    - name: swisnapd
     - restart: True
     - watch:
-      - file: /opt/appoptics/etc/plugins.d/mesos.yaml
+      - file: /opt/SolarWinds/Snap/etc/plugins.d/mesos.yaml
 
 ao_task_file:
   file.managed:
-    - name: /opt/appoptics/etc/tasks.d/task-aomesos.yaml
+    - name: /opt/SolarWinds/Snap/etc/tasks.d/task-aomesos.yaml
     - source: salt://files/appoptics/tasks/task-aomesos.yaml
-    - user: appoptics
-    - group: appoptics
+    - user: solarwinds
+    - group: solarwinds
     - mode: 644
   service.running:
-    - name: appoptics-snapteld
+    - name: swisnapd
     - restart: True
     - watch:
-      - file: /opt/appoptics/etc/tasks.d/task-aomesos.yaml
+      - file: /opt/SolarWinds/Snap/etc/tasks.d/task-aomesos.yaml

@@ -15,26 +15,26 @@ ao_plugin_file:
   cmd.run:
     - name:  sudo usermod -aG docker appoptics
   file.managed:
-    - name: /opt/appoptics/etc/plugins.d/docker.yaml
+    - name: /opt/SolarWinds/Snap/etc/plugins.d/docker.yaml
     - source: salt://files/appoptics/plugins/docker.yaml
-    - user: appoptics
-    - group: appoptics
+    - user: solarwinds
+    - group: solarwinds
     - mode: 644
   service.running:
-    - name: appoptics-snapteld
+    - name: swisnapd
     - restart: True
     - watch:
-      - file: /opt/appoptics/etc/plugins.d/docker.yaml
+      - file: /opt/SolarWinds/Snap/etc/plugins.d/docker.yaml
 
 ao_task_file:
   file.managed:
-    - name: /opt/appoptics/etc/tasks.d/task-aodocker.yaml
+    - name: /opt/SolarWinds/Snap/etc/tasks.d/task-aodocker.yaml
     - source: salt://files/appoptics/tasks/task-aodocker.yaml
-    - user: appoptics
-    - group: appoptics
+    - user: solarwinds
+    - group: solarwinds
     - mode: 644
   service.running:
-    - name: appoptics-snapteld
+    - name: swisnapd
     - restart: True
     - watch:
-      - file: /opt/appoptics/etc/tasks.d/task-aodocker.yaml
+      - file: /opt/SolarWinds/Snap/etc/tasks.d/task-aodocker.yaml
